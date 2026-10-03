@@ -1306,14 +1306,12 @@ html[data-dsh-overlay="true"] [data-submission-echo] [data-clock="start"] {
   pointer-events: none !important;
 }
 
-/* The stock idle composer action is labelled exactly "发送消息" / "Send message".
-   On the overlay this button can enter the same problematic host UI path, so
-   suppress only that exact action. Busy-state Queue / Steer / Stop controls keep
-   their distinct labels and are deliberately left alone. */
-html[data-dsh-overlay="true"] button[aria-label="发送消息"],
-html[data-dsh-overlay="true"] button[aria-label="Send message"],
-html[data-dsh-overlay="true"] button[title="发送消息"],
-html[data-dsh-overlay="true"] button[title="Send message"] {
+/* DSH renders the model-facing `send_message` tool as a DisclosureRow whose
+   visible localized title is "发送消息" / "Send message". That row is itself a
+   clickable role=button control and is distinct from the composer's normal send
+   arrow (the arrow only carries aria-label="发送消息"). Hide only the tool row so
+   the composer send arrow remains available. */
+html[data-dsh-overlay="true"] [data-tool="send_message"] {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
