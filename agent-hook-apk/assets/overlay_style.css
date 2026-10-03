@@ -1290,22 +1290,6 @@ html[data-dsh-overlay="true"] [data-po06="intercept"][data-po06-phase="failed"] 
   pointer-events: none !important;
 }
 
-/* Message chrome suppression for the mobile DSH overlay.
-   MessageIconActions is intentionally always revealed on coarse pointers, which
-   makes copy / branch / revert controls (plus iteration navigation) appear as a
-   row of small touch targets in the overlay. Keep that desktop chrome out of the
-   overlay, including transient submission / steering echoes. */
-html[data-dsh-overlay="true"] [data-chat-flow-kind="user"] [data-clock="start"],
-html[data-dsh-overlay="true"] [data-chat-flow-kind="steering"] [data-clock="start"],
-html[data-dsh-overlay="true"] [data-chat-flow-kind="user"] [class*="iterationActions"],
-html[data-dsh-overlay="true"] [data-chat-flow-kind="steering"] [class*="iterationActions"],
-html[data-dsh-overlay="true"] [data-pending-steering] [data-clock="start"],
-html[data-dsh-overlay="true"] [data-submission-echo] [data-clock="start"] {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
 /* DSH renders the model-facing `send_message` tool as a DisclosureRow whose
    visible localized title is "发送消息" / "Send message". That row is itself a
    clickable role=button control and is distinct from the composer's normal send
