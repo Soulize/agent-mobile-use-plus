@@ -1275,3 +1275,38 @@ html[data-dsh-overlay="true"] [data-chat-flow-kind="manual-compaction"] {
     animation: none !important;
   }
 }
+
+/* dsh-prompt-optimizer terminal result suppression.
+   In the DSH overlay, keep the optimizer's live/review/error controls usable,
+   but do not expose the post-send floating review entry. Reopening the terminal
+   result panel in the overlay WebView can stall that overlay; the normal DSH UI
+   remains untouched because every selector is gated by data-dsh-overlay. */
+html[data-dsh-overlay="true"] [data-po06="intercept-ball"],
+html[data-dsh-overlay="true"] [data-po06="intercept"][data-po06-phase="sent"],
+html[data-dsh-overlay="true"] [data-po06="intercept"][data-po06-phase="skipped"],
+html[data-dsh-overlay="true"] [data-po06="intercept"][data-po06-phase="failed"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* DSH renders the model-facing `send_message` tool as a DisclosureRow whose
+   visible localized title is "发送消息" / "Send message". That row is itself a
+   clickable role=button control and is distinct from the composer's normal send
+   arrow (the arrow only carries aria-label="发送消息"). Hide only the tool row so
+   the composer send arrow remains available. */
+html[data-dsh-overlay="true"] [data-tool="send_message"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Mobile overlay has no useful hover affordance: DSH tooltips are desktop
+   hover/focus hints and can surface as intrusive text bubbles such as
+   "停止生成 Esc Esc" / "发送消息". Hide the tooltip layer only; anchors/buttons
+   remain fully present and interactive. Ordinary DSH pages are unaffected. */
+html[data-dsh-overlay="true"] [role="tooltip"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
