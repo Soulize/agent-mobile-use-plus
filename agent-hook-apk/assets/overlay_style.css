@@ -1301,13 +1301,11 @@ html[data-dsh-overlay="true"] [data-tool="send_message"] {
   pointer-events: none !important;
 }
 
-/* Keep the real square Stop control, but suppress its hover/focus tooltip.
-   DSH renders this bubble with role=tooltip and an accessible name made from
-   the localized label plus the fixed shortcut keys: "停止生成 Esc Esc" /
-   "Stop generating Esc Esc". Matching the tooltip's exact aria-label avoids
-   touching the actual composer button whose aria-label is only "停止生成". */
-html[data-dsh-overlay="true"] [role="tooltip"][aria-label="停止生成 Esc Esc"],
-html[data-dsh-overlay="true"] [role="tooltip"][aria-label="Stop generating Esc Esc"] {
+/* Mobile overlay has no useful hover affordance: DSH tooltips are desktop
+   hover/focus hints and can surface as intrusive text bubbles such as
+   "停止生成 Esc Esc" / "发送消息". Hide the tooltip layer only; anchors/buttons
+   remain fully present and interactive. Ordinary DSH pages are unaffected. */
+html[data-dsh-overlay="true"] [role="tooltip"] {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
